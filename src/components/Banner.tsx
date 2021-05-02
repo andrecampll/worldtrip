@@ -11,7 +11,7 @@ export function Banner() {
     >
       <Box>
         <Heading as="h1" fontWeight="medium">
-          5 continentes,
+          5 Continentes,
         </Heading>
         <Heading as="h1" fontWeight="medium" marginBottom="5">
           infinitas possibilidades.
@@ -22,7 +22,7 @@ export function Banner() {
       </Box>
 
       <Box>
-        <Image src="/airplane.png" />
+        <Image src="/airplane.png" position="relative" top="10"/>
       </Box>
     </Flex>
   )
