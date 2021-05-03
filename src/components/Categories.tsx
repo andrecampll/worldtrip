@@ -1,6 +1,27 @@
+import { useEffect, useState } from 'react';
 import { Flex, Heading, Image, Box, Grid } from "@chakra-ui/react";
 
+type Category = {
+  id: number;
+  name: string;
+  image: string;
+}
+
+import { api } from '../services/api';
+
 export function Categories() {
+  const [ categories, setCategories ] = useState<Category[]>([]);
+
+  useEffect(() => {
+    async function loadCategories() {
+      const { data } = await api.get('/categories');
+
+      setCategories(data);
+    };
+
+    loadCategories();
+  }, []);
+
   return (
     <Flex direction="column" align="center" justify="center">
       <Grid
@@ -9,30 +30,16 @@ export function Categories() {
         height="220"
         mt="24"
       >
-        <Flex direction="column" align="center">
-          <Image src="/svg/cocktail.svg" height="20"/>
-          <Heading as="h4" fontSize="24" fontWeight="semibold" mt="3">
-            vida noturna
-          </Heading>
-        </Flex>
-        <Flex direction="column" align="center">
-          <Image src="/svg/surf.svg" height="20"/>
-          <Heading as="h4" fontSize="24" fontWeight="semibold" mt="3">
-            praia
-          </Heading>
-        </Flex>
-        <Flex direction="column" align="center">
-          <Image src="/svg/building.svg" height="20"/>
-          <Heading as="h4" fontSize="24" fontWeight="semibold" mt="3">
-            moderno
-          </Heading>
-        </Flex>
-        <Flex direction="column" align="center">
-          <Image src="/svg/classic.svg" height="20"/>
-          <Heading as="h4" fontSize="24" fontWeight="semibold" mt="3">
-            clássico
-          </Heading>
-        </Flex>
+        {
+          categories.map(category => (
+            <Flex direction="column" align="center" key={category.id}>
+              <Image src={`/svg/${category.image}.svg`} height="20"/>
+              <Heading as="h4" fontSize="24" fontWeight="semibold" mt="3">
+                {category.name}
+              </Heading>
+            </Flex>
+          ))
+        }
         <Flex direction="column" align="center">
           <Image src="/svg/world.svg" height="20"/>
           <Heading as="h4" fontSize="24" fontWeight="semibold" mt="3">
