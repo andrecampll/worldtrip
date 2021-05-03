@@ -7,7 +7,13 @@ type Continent = {
   image_url: string;
 }
 
-const mock: Continent[] = [
+type Category = {
+  id: number;
+  name: string;
+  image: string;
+}
+
+const continentsMock: Continent[] = [
   {
     id: 1,
     name: 'Europa',
@@ -28,6 +34,29 @@ const mock: Continent[] = [
   },
 ];
 
+const categoriesMock: Category[] = [
+  {
+    id: 1,
+    name: 'vida noturna',
+    image: 'cocktail',
+  },
+  {
+    id: 2,
+    name: 'praia',
+    image: 'surf',
+  },
+  {
+    id: 3,
+    name: 'moderno',
+    image: 'building',
+  },
+  {
+    id: 4,
+    name: 'clássico',
+    image: 'classic',
+  },
+];
+
 export function makeServer() {
   const server = createServer({
     serializers: {
@@ -40,7 +69,8 @@ export function makeServer() {
 
     routes() {
       this.namespace = 'api';
-      this.get('/continents', (schema, request) => mock);
+      this.get('/continents', (schema, request) => continentsMock);
+      this.get('/categories', (schema, request) => categoriesMock);
 
       this.namespace = '';
       this.passthrough();
