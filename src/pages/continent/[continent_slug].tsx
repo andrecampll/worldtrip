@@ -1,8 +1,9 @@
-import { Container } from '@chakra-ui/react';
+import { Container, Heading, Box } from '@chakra-ui/react';
 import { NextRouter, useRouter } from "next/router";
 
 import { Banner } from '../../components/continent/Banner';
 import { ContinentBio } from '../../components/continent/ContinentBio';
+import { ContinentCities } from '../../components/continent/ContinentCities';
 
 export default function ContinentPage() {
   const { query } : NextRouter  = useRouter();
@@ -13,7 +14,10 @@ export default function ContinentPage() {
 
       <Container maxWidth="1440" p="0">
         <Banner />
-        <ContinentBio />
+        <Container maxWidth="100%" py="20" px="100" m="0">
+          <ContinentBio />
+          <ContinentCities />
+        </Container>
       </Container>
     </>
   );
